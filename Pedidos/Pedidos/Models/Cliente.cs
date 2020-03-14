@@ -5,7 +5,7 @@ namespace Pedidos.Models
     {
         public Cliente(int? id = null, string nome = "")
         {
-            Id = id ?? new Guid().GetHashCode();
+            Id = id ?? Guid.NewGuid().GetHashCode();
             Nome = nome;
         }
         public string Nome { get; set; }

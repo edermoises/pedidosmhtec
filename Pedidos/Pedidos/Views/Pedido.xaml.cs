@@ -7,6 +7,7 @@ namespace Pedidos.Views
 {
     public partial class Pedido : ContentPage
     {
+
         public Pedido()
         {
             InitializeComponent();

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Pedidos.Views.ListaDePedidos">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Button Text="Novo Pedido"
+                    Command="{Binding onNovoPedido}"/>
+            
+        <ListView VerticalOptions="FillAndExpand" RowHeight="80" ItemsSource="{Binding Pedidos}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Id}" 
+                                   d:Text="{Binding .}" 
+                                   LineBreakMode="TailTruncation" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="20" />
+                            
+                            <Label Text="{Binding NomeDoCliente}" 
+                                   d:Text="Item description"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="15" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

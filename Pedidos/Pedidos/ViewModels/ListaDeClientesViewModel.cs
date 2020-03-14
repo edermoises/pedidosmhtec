@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Pedidos.Models;
+using Pedidos.Services;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
@@ -51,15 +52,8 @@ namespace Pedidos.ViewModels
 
         private void CarregarClientes()
         {
-            var clientes = new List<Cliente>
-            {
-                {  new Cliente(nome: "Arnaldo") },
-                {  new Cliente(nome: "Cezar") },
-                {  new Cliente(nome: "MHTec") },
-                {  new Cliente(nome: "Blumenau") },
-            };
-            Clientes = clientes.ToList();
-            TodosOsClientes = clientes.ToList();
+            TodosOsClientes = ClienteDataStore.clientes.ToList();
+            Clientes = TodosOsClientes.ToList();
         }
 
         private List<Cliente> _clientes;
