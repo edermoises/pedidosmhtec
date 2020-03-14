@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Pedidos.Models;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace Pedidos.ViewModels
@@ -10,8 +11,9 @@ namespace Pedidos.ViewModels
     public class ListaDeClientesViewModel : BaseViewModel
     {
         public ICommand OnPesquisar { get; }
-        public ListaDeClientesViewModel()
+        public ListaDeClientesViewModel(INavigation navigation)
         {
+            _navigation = navigation;
             CarregarClientes();
             OnPesquisar = new Command(Pesquisar);
         }
@@ -23,6 +25,25 @@ namespace Pedidos.ViewModels
             set { _pesquisa = value; OnPesquisar.Execute(null); }
         }
 
+        private Cliente _clienteSelecionado;
+        public Cliente ClienteSelecionado
+        {
+            get => _clienteSelecionado; set
+            {
+                _clienteSelecionado = value;
+                SelecionarCliente();
+            }
+        }
+
+        private async void SelecionarCliente()
+        {
+            if (_clienteSelecionado is null)
+                return;
+
+            MessagingCenter.Send(this, "SelecionouCliente", _clienteSelecionado);
+            await _navigation.PopPopupAsync();
+        }
+
         private void Pesquisar()
         {
             OnPropertyChanged(nameof(Clientes));
@@ -32,16 +53,18 @@ namespace Pedidos.ViewModels
         {
             var clientes = new List<Cliente>
             {
-                {  new Cliente("Arnaldo") },
-                {  new Cliente("Cezar") },
-                {  new Cliente("MHTec") },
-                {  new Cliente("Blumenau") },
+                {  new Cliente(nome: "Arnaldo") },
+                {  new Cliente(nome: "Cezar") },
+                {  new Cliente(nome: "MHTec") },
+                {  new Cliente(nome: "Blumenau") },
             };
             Clientes = clientes.ToList();
             TodosOsClientes = clientes.ToList();
         }
 
         private List<Cliente> _clientes;
+        private readonly INavigation _navigation;
+
         public List<Cliente> Clientes
         {
             get

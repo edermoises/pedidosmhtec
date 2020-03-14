@@ -16,7 +16,7 @@
                     Command="{Binding OnBuscarClientes}"
                     HorizontalOptions="Start"
                     ImageSource="ic_search"
-                    Text="Nome do cliente" />
+                    Text="{Binding Cliente.Nome}" />
 
                 <BoxView BackgroundColor="#C4C4C4" HeightRequest="1" />
                 <Label

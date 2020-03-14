@@ -3,9 +3,9 @@ namespace Pedidos.Models
 {
     public class Cliente : BaseModel
     {
-        public Cliente(string nome = "")
+        public Cliente(int? id = null, string nome = "")
         {
-            Id = new Guid().GetHashCode();
+            Id = id ?? new Guid().GetHashCode();
             Nome = nome;
         }
         public string Nome { get; set; }

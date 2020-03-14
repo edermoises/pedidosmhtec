@@ -11,7 +11,7 @@ namespace Pedidos.Views
         public ListaDeClientes()
         {
             InitializeComponent();
-            BindingContext = new ListaDeClientesViewModel();
+            BindingContext = new ListaDeClientesViewModel(Navigation);
         }
     }
 }
