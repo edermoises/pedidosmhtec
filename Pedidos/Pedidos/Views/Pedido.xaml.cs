@@ -8,10 +8,10 @@ namespace Pedidos.Views
     public partial class Pedido : ContentPage
     {
 
-        public Pedido()
+        public Pedido(Models.Pedido pedido = null)
         {
             InitializeComponent();
-            BindingContext = new PedidoViewModel(Navigation);
+            BindingContext = new PedidoViewModel(Navigation, pedido);
         }
     }
 }

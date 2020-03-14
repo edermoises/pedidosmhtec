@@ -17,27 +17,41 @@ namespace Pedidos.ViewModels
         private readonly INavigation _navigation;
         public ICommand OnBuscarClientes { get; }
         public ICommand onSalvarPedido { get; }
-        
-        public PedidoViewModel(INavigation navigation)
+
+        public PedidoViewModel(INavigation navigation, Pedido pedido = null)
         {
             _navigation = navigation;
-            Pedido = new Pedido();
-            Cliente = new Cliente(0, "Selecione um cliente");
-
+            Pedido = pedido ?? new Pedido();
             GerarCondicaoDePagamento();
-            
+
+            SetarCliente();
+            SetarCondicaoPagamento();
+
             CondicaoDePagamentoSelecionado = 1;
-            
+
             OnBuscarClientes = new Command(BuscarClientes);
             onSalvarPedido = new Command(SalvarPedido);
 
-            MessagingCenter.Subscribe<ListaDeClientesViewModel, Cliente>(this, "SelecionouCliente", async (obj, cliente) =>
-            {
-                var clienteSelecionado = cliente as Cliente;
-                Cliente = clienteSelecionado;
-            });
+            PedidoViewModel.Contexto = this;
         }
-        
+
+        private void SetarCliente()
+        {
+            if (Pedido.ClienteID == 0)
+                Cliente = new Cliente(0, "Selecione um cliente");
+            else
+                Cliente = new Cliente(Pedido.ClienteID, Pedido.NomeDoCliente);
+
+        }
+
+        private void SetarCondicaoPagamento()
+        {
+            if (string.IsNullOrEmpty(Pedido.CondicaoDePagamento))
+                CondicaoDePagamentoSelecionado = 0;
+            else
+                CondicaoDePagamentoSelecionado = CondicoesDePagamento.FindIndex(s => s.Equals(Pedido.CondicaoDePagamento));
+        }
+
         private Cliente _cliente;
         public Cliente Cliente
         {
@@ -51,18 +65,25 @@ namespace Pedidos.ViewModels
 
         public Pedido Pedido { get; set; }
         private int _condicaoDePagamentoSelecionado { get; set; }
-        public int CondicaoDePagamentoSelecionado { 
-            get 
+        public int CondicaoDePagamentoSelecionado
+        {
+            get
             {
                 return _condicaoDePagamentoSelecionado;
             }
-            set 
-            { 
+            set
+            {
                 _condicaoDePagamentoSelecionado = value;
                 Pedido.CondicaoDePagamento = CondicoesDePagamento[_condicaoDePagamentoSelecionado];
-            } 
+            }
         }
-        
+
+        public static void AdicionarClienteAoPedido(Cliente cliente) 
+        {
+            PedidoViewModel.Contexto.Cliente = cliente;
+        }
+
+
         private async void BuscarClientes(object obj)
         {
             await _navigation.PushPopupAsync(new ListaDeClientes());
@@ -70,10 +91,11 @@ namespace Pedidos.ViewModels
 
         private async void SalvarPedido()
         {
-            MessagingCenter.Send(this, "AddPedido", Pedido);
+            //MessagingCenter.Send(this, "AddPedido", Pedido);
+            ListaDePedidosViewModel.AdicionarPedido(Pedido);
             await _navigation.PopAsync();
         }
-        
+
         private void GerarCondicaoDePagamento()
         {
             var condicoesDePagamento = new List<string>
@@ -87,5 +109,6 @@ namespace Pedidos.ViewModels
         }
 
         public List<string> CondicoesDePagamento { get; set; }
+        public static PedidoViewModel Contexto { get; set; }
     }
 }

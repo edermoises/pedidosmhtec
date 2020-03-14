@@ -10,19 +10,17 @@
             <Button Text="Novo Pedido"
                     Command="{Binding onNovoPedido}"/>
             
-        <ListView VerticalOptions="FillAndExpand" RowHeight="80" ItemsSource="{Binding Pedidos}">
+        <ListView SelectedItem="{Binding PedidoSelecionado}" VerticalOptions="FillAndExpand" RowHeight="80" ItemsSource="{Binding Pedidos}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding Id}" 
-                                   d:Text="{Binding .}" 
                                    LineBreakMode="TailTruncation" 
                                    Style="{DynamicResource ListItemTextStyle}" 
                                    FontSize="20" />
                             
                             <Label Text="{Binding NomeDoCliente}" 
-                                   d:Text="Item description"
                                    LineBreakMode="NoWrap" 
                                    Style="{DynamicResource ListItemDetailTextStyle}"
                                    FontSize="15" />

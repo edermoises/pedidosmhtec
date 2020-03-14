@@ -12,6 +12,8 @@ namespace Pedidos.ViewModels
     public class ListaDeClientesViewModel : BaseViewModel
     {
         public ICommand OnPesquisar { get; }
+        public static ListaDeClientesViewModel Contexto;
+
         public ListaDeClientesViewModel(INavigation navigation)
         {
             _navigation = navigation;
@@ -36,13 +38,21 @@ namespace Pedidos.ViewModels
             }
         }
 
-        private async void SelecionarCliente()
+        public async void SelecionarCliente()
         {
             if (_clienteSelecionado is null)
                 return;
 
-            MessagingCenter.Send(this, "SelecionouCliente", _clienteSelecionado);
+            //MessagingCenter.Send(this, "SelecionouCliente", _clienteSelecionado);
+            PedidoViewModel.AdicionarClienteAoPedido(_clienteSelecionado);
             await _navigation.PopPopupAsync();
+            //MessagingCenter.Unsubscribe<ListaDeClientesViewModel>(this, "");
+        }
+
+        public static void AdicionarCliente(Cliente cliente) 
+        {
+            ListaDeClientesViewModel.Contexto.Clientes.Add(cliente);
+            ListaDeClientesViewModel.Contexto.Clientes = ListaDeClientesViewModel.Contexto.Clientes.ToList();
         }
 
         private void Pesquisar()
