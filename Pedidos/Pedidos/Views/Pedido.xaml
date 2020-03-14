@@ -31,7 +31,11 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Data de Emissão" />
-                <DatePicker Format="dd/MM/yyyy" />
+                <DatePicker Format="dd/MM/yyyy" 
+                            Date="{Binding Pedido.DataEmissao}"/>
+
+                <Button Text="Salvar" 
+                        Command="{Binding onSalvarPedido}"/>
             </StackLayout>
         </ContentView>
     </ContentPage.Content>

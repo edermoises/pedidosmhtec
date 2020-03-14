@@ -14,8 +14,9 @@ namespace Pedidos
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            MainPage = new NavigationPage(new Pedido());
+            DependencyService.Register<PedidoDataStore>();
+            ClienteDataStore.CarregarClientes();
+            MainPage = new NavigationPage(new ListaDePedidos());
         }
 
         protected override void OnStart()
