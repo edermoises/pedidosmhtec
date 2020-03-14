@@ -7,5 +7,7 @@ namespace Pedidos.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal ValorUnitario { get; set; }
+        public int Quantidade { get; set; }
+        public decimal Total => Quantidade * ValorUnitario;
     }
 }

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Pedidos.Views.CatalogoProduto">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="Produtos" 
+                      ItemsSource="{Binding Produtos}" 
+                      HasUnevenRows="true"
+                      VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="16,40,16,0" 
+                                    HeightRequest="100" 
+                                    Orientation= "Horizontal"
+                                    VerticalOptions="Start">
+                                <Image BackgroundColor="#1B2638" 
+                                   WidthRequest="70" 
+                                   HeightRequest="70" 
+                                   Margin="0,0,16,0"
+                                   VerticalOptions="Center"/>
+                                <Label Text="{Binding Nome}" 
+                                   HorizontalOptions="FillAndExpand"
+                                   FontAttributes="Bold" 
+                                   VerticalTextAlignment="Center"
+                                   FontSize="16"
+                                   Margin="0,0,8,0"/>
+                                <Button Text="-" 
+                                   TextColor="White" 
+                                   BackgroundColor="#1B2638" 
+                                   WidthRequest="32" 
+                                   HeightRequest="32" 
+                                   CornerRadius="16" 
+                                   FontSize="16" 
+                                   Padding="0"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   Command="{Binding Path=BindingContext.OnDiminuirQtdProduto, Source={x:Reference Produtos}}"
+                                   CommandParameter="{Binding .}"/>
+                                <Label Text="{Binding Quantidade}" 
+                                   Margin="8,0,8,0"
+                                   VerticalOptions="Center"
+                                   WidthRequest="50"
+                                   HorizontalTextAlignment="Center"/>
+                                <Button Text="+" 
+                                    TextColor="White" 
+                                    BackgroundColor="#1B2638" 
+                                    WidthRequest="32" 
+                                    HeightRequest="32" 
+                                    CornerRadius="16" 
+                                    FontSize="16" 
+                                    Padding="0"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Path=BindingContext.OnAcrescentarQtdProduto, Source={x:Reference Produtos}}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout BackgroundColor="#1B2638"
+                         VerticalOptions="End"
+                         HeightRequest="50">
+                <Label Text="{Binding Total, StringFormat='Total: {0:c2}'}"
+                       TextColor="White"
+                       HorizontalOptions="EndAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Margin="0,0,16,0"
+                       FontAttributes="Bold"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

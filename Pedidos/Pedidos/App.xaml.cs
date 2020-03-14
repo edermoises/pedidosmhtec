@@ -16,7 +16,8 @@ namespace Pedidos
 
             DependencyService.Register<PedidoDataStore>();
             ClienteDataStore.CarregarClientes();
-            MainPage = new NavigationPage(new ListaDePedidos());
+            ProdutoDataStore.CarregarProdutos();
+            MainPage = new NavigationPage(new CatalogoProduto());
         }
 
         protected override void OnStart()
