@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Pedidos.Views.Pedido"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <ContentView Margin="40">
+            <StackLayout Spacing="0">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Nome do cliente" />
+                <Entry HorizontalOptions="FillAndExpand" Text="{Binding Cliente.Nome}" />
+
+                <Label
+                    Margin="0,24,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Condição de pagamento" />
+                <Picker ItemsSource="{Binding CondicoesDePagamento}" SelectedIndex="{Binding CondicaoDePagamentoSelecionado}" />
+
+                <Label
+                    Margin="0,24,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Data de Emissão" />
+                <DatePicker Format="dd/MM/yyyy" />
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>
