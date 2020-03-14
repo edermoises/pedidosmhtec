@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pedidos.ViewModels;
+using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
 
 namespace Pedidos.Views
 {
-    public partial class Pedido : ContentPage
+    public partial class ListaDeClientes : PopupPage
     {
-        public Pedido()
+        public ListaDeClientes()
         {
             InitializeComponent();
-            BindingContext = new PedidoViewModel(Navigation);
+            BindingContext = new ListaDeClientesViewModel();
         }
     }
 }

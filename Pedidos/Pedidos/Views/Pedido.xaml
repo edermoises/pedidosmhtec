@@ -10,8 +10,15 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Nome do cliente" />
-                <Entry HorizontalOptions="FillAndExpand" Text="{Binding Cliente.Nome}" />
+                <Button
+                    Padding="0,0,80,0"
+                    BackgroundColor="Transparent"
+                    Command="{Binding OnBuscarClientes}"
+                    HorizontalOptions="Start"
+                    ImageSource="ic_search"
+                    Text="Nome do cliente" />
 
+                <BoxView BackgroundColor="#C4C4C4" HeightRequest="1" />
                 <Label
                     Margin="0,24,0,0"
                     FontAttributes="Bold"

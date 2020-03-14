@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    x:Class="Pedidos.Views.ListaDeClientes"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+
+    <Frame
+        Margin="0,100,0,0"
+        BackgroundColor="White"
+        CornerRadius="16"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <ListView Header="{Binding}" ItemsSource="{Binding Clientes}">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="0,0,0,16" Orientation="Horizontal">
+                        <Image Source="ic_search" />
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Pesquisar"
+                            PlaceholderColor="#C4C4C4"
+                            ReturnCommand="{Binding OnPesquisar}"
+                            ReturnType="Search"
+                            Text="{Binding Pesquisa}" />
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nome}" TextColor="Black" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Frame>
+</pages:PopupPage>
